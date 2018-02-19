@@ -33,7 +33,11 @@ data_B = pd.read_csv(Flnb_VIX)
 data_M =data_A.merge(data_B, left_on='Date', right_on='Date', how='inner')
 data_M.fillna(0)
 
+#Add axis into 4 for projection
+
 data_Close_H= AddSeries(data_M['Close_x'],4)
 data_Close_V= AddSeries(data_M['Close_y'],4)
 Re_D=[data_Close_H,data_Close_V]
 Data_x = pd.concat(Re_D,axis=1)
+
+
