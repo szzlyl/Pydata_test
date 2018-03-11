@@ -2,18 +2,18 @@ import numpy as np
 import pandas as pd
 import tensorflow as tf
 
-def AddSeries(Input_Series,ind_a):
+def AddSeries(input_series,ind_a):
 
 # Add ind_a columns of Input_Series for
 # The array
 # Return the data frame
-    size_in = Input_Series.size
-    t_s = Input_Series
+    size_in = input_series.size
+    t_s = input_series
     t_i =1
     for t_i in range(1, ind_a)
-        t_b = pd.Series(np.zeros(t_i)).append(Input_Series[0:size_in-t_i],ignore_index=True)
-        DF = [t_s,t_b]
-        t_s = pd.concat(DF,axis=1)
+        t_b = pd.Series(np.zeros(t_i)).append(input_series[0:size_in-t_i],ignore_index=True)
+        df = [t_s,t_b]
+        t_s = pd.concat(df,axis=1)
     return t_s
 
 
@@ -66,10 +66,7 @@ loss = tf.reduce_mean(tf.reduce_sum(tf.square(ys - prediction),
 
 train_step = tf.train.GradientDescentOptimizer(0.1).minimize(loss)
 
-if int((tf.__version__).split('.')[1]) < 12:
-    init = tf.initialize_all_variables()
-else:
-    init = tf.global_variables_initializer()
+init = tf.global_variables_initializer()
 sess = tf.Session()
 sess.run(init)
 
